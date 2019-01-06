@@ -1,51 +1,49 @@
-struct rectangle {
+struct rect_tag {
   float left;
   float bottom;
-  float right;
   float top;
+  float right;
+};
+typedef struct rect_tag rect_t;
+
+float minimum(float f1, float f2) {
+  // compare f1 to f2
+  if (f1 < f2) {
+    // if f1 is smaller than f2, then f1 is your answer
+    return f1;
+  }
+  else {
+    // otherwise, f2 is your answer
+    return f2;
+  }
 }
-  typedef struct rectangle rect;
 
-//to find the intersection of two rectangle r1 and r2
+float maximum(float f1, float f2) {
+  // compare f1 to f2
+  if (f1 > f2) {
+    // if f1 is larger than f2, then f1 is your answer
+    return f1;
+  }
+  else {
+    // otherwise, f2 is your answer
+    return f2;
+  }
+}
 
-rect intersection_of_two_rectangle(rect r1, rect r2){
-
-  //make a rectangle result
-  rect ans;
-  
-  //the resultant rectangle left is max of left of r1 and r2
-  ans.left=max(r1.left, r2.left);
-
-  //the resultant rectangle bottom is max of bottom of r1 and r2
-  ans.bottom=max(r1.bottom, r2.bottom);
-  
-  // the resultant rectangle top is minimum of top of r1 and r2
+// To find the intersection of two rectangles, r1 and r2:
+rect_t intersection(rect_t r1, rect_t r2) {
+  // Make a rectangle (called ans) with
+  rect_t ans;
+  // left: maximum of r1's left and r2's left
+  ans.left = max(r1.left, r2.left);
+  // bottom: maximum or r1's bottom and r2's bottom
+  ans.bottom = max(r1.bottom, r2.bottom);
+  // right: minimum of r1's right and r2's right
+  ans.right = minimum(r1.right, r2.right);
+  // top: minimum of r1's top and r2's top
   ans.top = minimum(r1.top, r2.top);
-  
-  //the resultant rectangle right is minimum of right of r1 and r2.
-  ans.right=minimum(r1.right, r2.right);
-
-  //now return the resultant rectangle
+ // The rectangle called ans is your answer
   return ans;
 }
 
 
-//declare function that find the maximum of two numbers
-float max(float n1, float n2){
-  if (n1>n2){
-    return n1;
-  }
-  else{
-    return n2;
-  }
-}
-
-//declare function that find minimum  of two numbers
-float minimum(float n1, float n2){
-  if (n1<n2){
-    return n1;
-  }
-  else{
-    return n2;
-  }
-}
